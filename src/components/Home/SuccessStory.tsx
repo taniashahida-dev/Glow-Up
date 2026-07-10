@@ -63,7 +63,7 @@ const containerVariants = {
     opacity: 1,
     transition: { staggerChildren: 0.1 },
   },
-};
+} as const;
 
 const itemVariants = {
   hidden: { opacity: 0, y: 25 },
@@ -72,7 +72,7 @@ const itemVariants = {
     y: 0,
     transition: { type: "spring", stiffness: 80, damping: 14 },
   },
-};
+} as const;
 
 export default function SuccessStory() {
   return (
@@ -132,7 +132,7 @@ export default function SuccessStory() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3, type: "spring" }}
+          transition={{ duration: 0.6, delay: 0.3, type: "spring" as const }}
           className="bg-white p-6 md:p-8 rounded-2xl border border-slate-100/80 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.03)]"
         >
           <div className="mb-6">
@@ -142,7 +142,7 @@ export default function SuccessStory() {
           </div>
 
           <div className="w-full h-80 md:h-100">
-            <ResponsiveContainer width="100%" h="100%">
+            <ResponsiveContainer width="100%" height="100%">
               <AreaChart
                 data={chartData}
                 margin={{ top: 10, right: 10, left: -20, bottom: 0 }}

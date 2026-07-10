@@ -44,6 +44,7 @@ const containerVariants = {
   },
 };
 
+
 const cardVariants = {
   hidden: {
     opacity: 0,
@@ -68,7 +69,7 @@ const cardVariants = {
       ease: "easeInOut",
     },
   },
-};
+} as const; 
 
 export default function BookingProcess() {
   return (

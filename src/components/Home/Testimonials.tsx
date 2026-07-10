@@ -39,7 +39,7 @@ const containerVariants = {
     opacity: 1,
     transition: { staggerChildren: 0.2 },
   },
-};
+} as const;
 
 const cardVariants = {
   hidden: { opacity: 0, scale: 0.92, y: 30 },
@@ -49,7 +49,7 @@ const cardVariants = {
     y: 0,
     transition: { type: "spring", stiffness: 65, damping: 15 },
   },
-};
+} as const;
 
 export default function Testimonials() {
   return (
@@ -62,7 +62,7 @@ export default function Testimonials() {
           </span>
           <h2 className="text-3xl md:text-5xl font-extrabold text-salon-dark mb-4 tracking-tight">
             What Our Clients{" "}
-            <span className="italic font-serif font-normal text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500">
+            <span className="italic font-serif font-normal text-transparent bg-clip-text bg-linear-to-r from-pink-500 to-purple-500">
               Say
             </span>
           </h2>

@@ -1,18 +1,17 @@
 
-import WhyChooseUs from "@/components/WhyChooseUs";
-import Hero from "../components/Hero";
-import Navbar from "../components/Navbar";
-import SuccessStory from "@/components/SuccessStory";
-import BookingProcess from "@/components/BookingProcess";
-import FeaturedStylists from "@/components/FeaturedStylists";
-import Testimonials from "@/components/Testimonials";
-import Newsletter from "@/components/Newslatter";
-import Footer from "@/components/Footer";
+import WhyChooseUs from "@/components/Home/WhyChooseUs";
+import Hero from "../components/Home/Hero";
+import SuccessStory from "@/components/Home/SuccessStory";
+import BookingProcess from "@/components/Home/BookingProcess";
+import FeaturedStylists from "@/components/Home/FeaturedStylists";
+import Testimonials from "@/components/Home/Testimonials";
+import Newsletter from "@/components/Home/Newslatter";
+
 
 export default function Home() {
   return (
   <div>
-    <Navbar></Navbar>
+  
     <Hero></Hero>
     <WhyChooseUs></WhyChooseUs>
     <FeaturedStylists></FeaturedStylists>
@@ -20,7 +19,7 @@ export default function Home() {
     <SuccessStory></SuccessStory>
     <Testimonials></Testimonials>
     <Newsletter></Newsletter>
-    <Footer></Footer>
+    
   </div>
   );
 }

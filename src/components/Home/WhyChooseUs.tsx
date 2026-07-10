@@ -44,7 +44,7 @@ const containerVariants = {
     opacity: 1,
     transition: { staggerChildren: 0.12 },
   },
-};
+} as const;
 
 const cardVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -53,7 +53,7 @@ const cardVariants = {
     y: 0,
     transition: { type: "spring", stiffness: 100, damping: 16 },
   },
-};
+} as const;
 
 export default function WhyChooseUs() {
   return (

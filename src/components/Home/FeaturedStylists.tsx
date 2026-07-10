@@ -1,8 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
-import Link from "next/link";
 import { Star } from "lucide-react";
 
 const stylists = [
@@ -46,6 +44,7 @@ const containerVariants = {
   },
 };
 
+
 const cardVariants = {
   hidden: { opacity: 0, y: 50 },
   visible: {
@@ -53,7 +52,7 @@ const cardVariants = {
     y: 0,
     transition: { type: "spring", stiffness: 60, damping: 14 },
   },
-};
+} as const; 
 
 export default function FeaturedStylists() {
   return (
@@ -92,13 +91,10 @@ export default function FeaturedStylists() {
             >
               {/* Image & Overlay Info Box */}
               <div className="relative h-80 w-full overflow-hidden bg-slate-100">
-                <Image
+                <img
                   src={stylist.image}
                   alt={stylist.name}
-                  fill
-                  sizes="(max-w-7xl) 33vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                  priority={stylist.id === 1}
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
 
                 <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
@@ -141,14 +137,14 @@ export default function FeaturedStylists() {
                   {stylist.bio}
                 </p>
 
-                <Link href="/services" className="w-full block">
+                <a href="/services" className="w-full block">
                   <motion.button
                     whileTap={{ scale: 0.98 }}
                     className="w-full py-3 px-4 rounded-xl text-sm font-semibold text-white bg-linear-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 shadow-md shadow-pink-500/10 hover:shadow-lg hover:shadow-pink-500/20 transition-all duration-300 flex items-center justify-center gap-1 group-hover:opacity-100"
                   >
                     Book with {stylist.name.split(" ")[0]}
                   </motion.button>
-                </Link>
+                </a>
               </div>
             </motion.div>
           ))}
