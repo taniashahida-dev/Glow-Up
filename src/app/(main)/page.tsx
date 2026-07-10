@@ -1,6 +1,6 @@
 
 import WhyChooseUs from "@/components/Home/WhyChooseUs";
-import Hero from "../components/Home/Hero";
+import Hero from "../../components/Home/Hero";
 import SuccessStory from "@/components/Home/SuccessStory";
 import BookingProcess from "@/components/Home/BookingProcess";
 import FeaturedStylists from "@/components/Home/FeaturedStylists";

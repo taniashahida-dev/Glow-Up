@@ -107,8 +107,8 @@ export default function Navbar({ user, onLogout }: NavbarProps) {
               >
                 Login
               </Link>
-              <Link href="/register" className="btn-pink py-2! px-4!">
-                Register
+              <Link href="/signup" className="btn-pink py-2! px-4!">
+               signup
               </Link>
             </>
           )}
