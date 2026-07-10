@@ -24,14 +24,13 @@ export default function Hero() {
 
           {/* Headings with Gradient */}
           <h1 className="text-5xl md:text-6xl font-extrabold leading-tight tracking-tight text-white mb-4">
-            Book Your Perfect <br />
-            <span className="text-glow-gradient">Salon Experience</span>
+            Transform Your <br />
+            <span className="text-glow-gradient">Beauty Journey</span>
           </h1>
 
           {/* Description */}
           <p className="text-gray-300 text-base md:text-lg mb-8 leading-relaxed font-light">
-            Discover expert hair, skin, and beauty services tailored just for you. 
-            Over 1,200 satisfied clients trust GlowUp for their transformation journey.
+           Discover a sanctuary where world-class stylists, premium treatments, and effortless booking converge. Your most radiant self awaits.
           </p>
 
           {/* CTA Buttons */}
