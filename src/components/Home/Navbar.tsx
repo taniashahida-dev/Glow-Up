@@ -4,16 +4,15 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChessQueen, Menu, X } from "lucide-react"; // Menu এবং X আইকন যোগ করা হয়েছে
+import { getUserSession } from "@/lib/core/session";
+import { useSession } from "@/lib/auth-client";
 
-interface NavbarProps {
-  user?: {
-    name: string;
-    role: string;
-  } | null;
-  onLogout?: () => void;
-}
 
-export default function Navbar({ user, onLogout }: NavbarProps) {
+
+export default function Navbar() {
+ const { data } = useSession();
+  const user = data?.user;
+  console.log(user)
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false); // মোবাইল মেনু ওপেন/ক্লোজ স্টেট
   const pathname = usePathname();
@@ -93,7 +92,7 @@ export default function Navbar({ user, onLogout }: NavbarProps) {
                 Dashboard
               </Link>
               <button
-                onClick={onLogout}
+                
                 className="hover:text-red-500 font-medium transition-colors cursor-pointer text-salon-muted"
               >
                 Logout
@@ -170,7 +169,7 @@ export default function Navbar({ user, onLogout }: NavbarProps) {
                 Dashboard
               </Link>
               <button
-                onClick={() => { onLogout?.(); setIsOpen(false); }}
+                onClick={() => { setIsOpen(false); }}
                 className="text-left text-base font-medium text-red-500 cursor-pointer"
               >
                 Logout
