@@ -61,7 +61,7 @@ export default async function ServicesPage({ searchParams }: PageProps) {
           </p>
         </div>
 
-        <ServiceFilterControls totalItems={data.pagination.totalItems} />
+        <ServiceFilterControls pagination={data.pagination} />
 
         {data.services.length === 0 ? (
           <div className="text-center py-20 bg-white rounded-2xl border border-dashed border-slate-200">

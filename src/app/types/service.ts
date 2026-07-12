@@ -10,6 +10,10 @@ export interface Service {
   image: string;
   createdAt: string;
 }
+export interface ServiceDetailsResponse {
+  service: Service;
+  relatedServices: Service[];
+}
 
 export interface ServicesApiResponse {
   services: Service[];
