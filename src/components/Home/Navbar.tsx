@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Crown, Menu, X, ChevronDown, LayoutDashboard, CalendarDays, ClipboardList, PlusCircle, Users, LogOut, Settings } from "lucide-react";
+import { Crown, Menu, X, ChevronDown, LayoutDashboard, CalendarDays, ClipboardList, PlusCircle, Users, LogOut, LeafyGreen } from "lucide-react";
 import { useSession } from "@/lib/auth-client";
 
 export default function Navbar() {
@@ -42,7 +42,9 @@ export default function Navbar() {
   }, []);
 
   const isActive = (path: string) => pathname === path;
-  const isWhiteNavbar = isScrolled || isOpen || pathname === "/services" || pathname === "/contact";
+  
+  // 🚀 শুধুমাত্র হোম (/) এবং অ্যাবাউট (/about) পেজে ট্রান্সপারেন্ট থাকবে, বাকি সব পেজে হোয়াইট ব্যাকগ্রাউন্ড হবে
+  const isWhiteNavbar = isScrolled || isOpen || (pathname !== "/" && pathname !== "/about");
 
   const handleLogout = () => {
     setIsDropdownOpen(false);
@@ -86,13 +88,10 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center gap-4">
           {user ? (
-          
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className={`flex items-center gap-1 text-sm font-medium focus:outline-hidden cursor-pointer select-none transition-colors ${
-                  isWhiteNavbar ? "text-salon-dark hover:text-salon-pink" : "text-white hover:text-gray-200"
-                }`}
+                className={`flex items-center gap-1 text-sm font-medium focus:outline-hidden cursor-pointer text-salon-pink bg-pink-200/50 rounded-2xl p-2 select-none transition-colors `}
               >
                 <span>Hello, <span className="font-semibold">{user.name}</span></span>
                 <ChevronDown size={14} className={`transition-transform duration-200 ${isDropdownOpen ? "rotate-180" : ""}`} />
@@ -106,7 +105,7 @@ export default function Navbar() {
                     <p className="text-xs font-bold text-salon-pink capitalize">{user.role || "User"}</p>
                   </div>
 
-                  {/*  ADMIN MENU */}
+                  {/* ADMIN MENU */}
                   {user.role === "admin" ? (
                     <>
                       <Link href="/admin/add-service" onClick={() => setIsDropdownOpen(false)} className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-salon-pink transition-colors">
@@ -118,24 +117,25 @@ export default function Navbar() {
                       <Link href="/admin/manage-users" onClick={() => setIsDropdownOpen(false)} className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-salon-pink transition-colors">
                         <Users size={16} /> Manage Users
                       </Link>
+                      <Link href="/admin/dashboard" onClick={() => setIsDropdownOpen(false)} className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-salon-pink transition-colors border-t border-slate-50 mt-1">
+                        <LayoutDashboard size={16} /> Dashboard
+                      </Link>
                     </>
                   ) : (
                     /* 👤NORMAL USER MENU */
                     <>
-                      <Link href="/my-bookings" onClick={() => setIsDropdownOpen(false)} className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-salon-pink transition-colors">
+                      <Link href="/user/my-bookings" onClick={() => setIsDropdownOpen(false)} className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-salon-pink transition-colors">
                         <CalendarDays size={16} /> My Bookings
                       </Link>
                       <Link href="/services" onClick={() => setIsDropdownOpen(false)} className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-salon-pink transition-colors">
-                        <Settings size={16} /> Services
+                        <LeafyGreen size={16} /> Services
+                      </Link>
+                      <Link href="/user/dashboard" onClick={() => setIsDropdownOpen(false)} className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-salon-pink transition-colors border-t border-slate-50 mt-1">
+                        <LayoutDashboard size={16} /> Dashboard
                       </Link>
                     </>
                   )}
 
-                
-                  <Link href="/dashboard" onClick={() => setIsDropdownOpen(false)} className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-salon-pink transition-colors border-t border-slate-50 mt-1">
-                    <LayoutDashboard size={16} /> Dashboard
-                  </Link>
-                  
                   <button onClick={handleLogout} className="w-full flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-red-500 hover:bg-red-50/50 transition-colors text-left cursor-pointer">
                     <LogOut size={16} /> Logout
                   </button>
@@ -190,7 +190,6 @@ export default function Navbar() {
                 <span className="inline-block mt-1 text-[10px] bg-pink-100 text-salon-pink px-2 py-0.5 rounded-md font-bold uppercase tracking-wider">{user.role || "User"}</span>
               </div>
               
-            
               {user.role === "admin" ? (
                 <>
                   <Link href="/admin/add-service" onClick={() => setIsOpen(false)} className="text-sm font-medium text-slate-600 pl-1">Add Service</Link>
@@ -199,7 +198,7 @@ export default function Navbar() {
                 </>
               ) : (
                 <>
-                  <Link href="/my-bookings" onClick={() => setIsOpen(false)} className="text-sm font-medium text-slate-600 pl-1">My Bookings</Link>
+                  <Link href="/user/my-bookings" onClick={() => setIsOpen(false)} className="text-sm font-medium text-slate-600 pl-1">My Bookings</Link>
                   <Link href="/services" onClick={() => setIsOpen(false)} className="text-sm font-medium text-slate-600 pl-1">Services</Link>
                 </>
               )}

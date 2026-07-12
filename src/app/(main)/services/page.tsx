@@ -79,11 +79,12 @@ export default async function ServicesPage({ searchParams }: PageProps) {
                 {/* Image & Category Tag */}
                 <div className="relative aspect-video w-full overflow-hidden bg-slate-100">
                   <Image
-                    src={service.image || "/placeholder-salon.jpg"}
-                    alt={service.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
+  src={service.image || "/placeholder-salon.jpg"}
+  alt={service.title}
+  fill
+  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+  className="object-cover group-hover:scale-105 transition-transform duration-500"
+/>
                   <span className="absolute top-3 right-3 bg-pink-100/70 rounded-2xl text-pink-400 text-xs font-bold px-2.5 py-1 ">
                     {service.category}
                   </span>

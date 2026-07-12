@@ -127,12 +127,13 @@ export default function ServiceDetailsClient({
           {/* Image */}
           <div className="lg:col-span-6 relative aspect-square sm:aspect-video lg:aspect-square w-full rounded-2xl overflow-hidden bg-slate-100 border border-slate-100">
             <Image
-              src={service.image || "/placeholder-salon.jpg"}
-              alt={service.title}
-              fill
-              priority
-              className="object-cover"
-            />
+  src={service.image || "/placeholder-salon.jpg"}
+  alt={service.title}
+  fill
+  priority
+  sizes="(max-width: 768px) 100vw, 50vw"
+  className="object-cover"
+/>
             <span className="absolute top-4 left-4 bg-white/95 backdrop-blur-xs rounded-full text-salon-pink text-xs font-bold px-3 py-1.5 shadow-xs flex items-center gap-1">
               <Sparkles size={12} /> {service.category}
             </span>

@@ -1,12 +1,24 @@
-import { DashboardAnalyticsResponse } from "@/app/types/dashboard";
+import {
+  DashboardAnalyticsResponse,
+  UserDashboardAnalyticsResponse,
+} from "@/app/types/dashboard";
 import { serverFetch } from "../core/server";
 import { getAccessToken } from "./token";
 
-// Admin only — stats + monthly chart data for the admin dashboard
 export const getDashboardAnalytics = async (): Promise<DashboardAnalyticsResponse> => {
   const token = await getAccessToken();
   return serverFetch<DashboardAnalyticsResponse>(
     "/api/admin/dashboard-analytics",
+    {},
+    token
+  );
+};
+
+// Logged-in user — their own booking stats + spend charts
+export const getUserDashboardAnalytics = async (): Promise<UserDashboardAnalyticsResponse> => {
+  const token = await getAccessToken();
+  return serverFetch<UserDashboardAnalyticsResponse>(
+    "/api/user/dashboard-analytics",
     {},
     token
   );
