@@ -42,7 +42,7 @@ export default async function ServicesPage({ searchParams }: PageProps) {
   }
 
   return (
-    <div className="bg-[#f8fafc] min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+    <div className="bg-[#f8fafc] min-h-screen py-12 px-4 mt-10 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto space-y-12">
         {/* Figma Header Section */}
         <div className="text-center space-y-3">

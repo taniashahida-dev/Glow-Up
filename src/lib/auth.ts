@@ -29,27 +29,26 @@ export const auth = betterAuth({
     },
 
  databaseHooks: {
-  user: {
-    create: {
-      before: async (user) => {
-        console.log("HOOK RUNNING", user);
-
-        return {
-          data: {
-            ...user,
-            role: "user",
-          },
-        };
+    user: {
+      create: {
+        before: async (user) => {
+          console.log("HOOK RUNNING", user);
+          return {
+            data: {
+              ...user,
+              role: "user", 
+            },
+          };
+        },
       },
     },
   },
-},
 
   user: {
     additionalFields: {
       role: {
         type: "string",
-        default: "user",
+        defaultValue: "user"
       },
     },
   },

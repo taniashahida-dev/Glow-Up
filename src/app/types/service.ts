@@ -10,6 +10,7 @@ export interface Service {
   image: string;
   createdAt: string;
 }
+
 export interface ServiceDetailsResponse {
   service: Service;
   relatedServices: Service[];
@@ -30,4 +31,19 @@ export interface ServicePageParams {
   category?: string;
   sortBy?: string;
   page?: string;
+}
+
+export type CreateServiceInput = Omit<Service, "_id" | "createdAt">;
+
+export interface CreateServiceResponse {
+  success: boolean;
+  result: {
+    acknowledged: boolean;
+    insertedId: string;
+  };
+}
+
+export interface DeleteServiceResponse {
+  acknowledged: boolean;
+  deletedCount: number;
 }
