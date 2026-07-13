@@ -31,6 +31,15 @@ export const createService = async (
   return serverMutation<CreateServiceResponse>("/api/services", serviceData, "POST", token);
 };
 
+export const updateService = async (
+  id: string,
+  updates: Partial<CreateServiceInput>
+): Promise<{ success: boolean; result: unknown }> => {
+  const token = await getAccessToken();
+  return serverMutation(`/api/services/${id}`, updates, "PATCH", token);
+};
+
+
 // Admin only — delete a service
 export const deleteService = async (id: string): Promise<DeleteServiceResponse> => {
   const token = await getAccessToken();

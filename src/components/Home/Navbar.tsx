@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Crown, Menu, X, ChevronDown, LayoutDashboard, CalendarDays, ClipboardList, PlusCircle, Users, LogOut, LeafyGreen } from "lucide-react";
+import { Crown, Menu, X, ChevronDown, LayoutDashboard, CalendarDays, ClipboardList, PlusCircle,  LogOut, LeafyGreen } from "lucide-react";
 import { authClient, useSession } from "@/lib/auth-client";
 
 export default function Navbar() {
@@ -116,9 +116,7 @@ export default function Navbar() {
                       <Link href="/admin/manage-services" onClick={() => setIsDropdownOpen(false)} className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-salon-pink transition-colors">
                         <ClipboardList size={16} /> Manage Services
                       </Link>
-                      <Link href="/admin/manage-users" onClick={() => setIsDropdownOpen(false)} className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-salon-pink transition-colors">
-                        <Users size={16} /> Manage Users
-                      </Link>
+                      
                       <Link href="/admin/dashboard" onClick={() => setIsDropdownOpen(false)} className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-salon-pink transition-colors border-t border-slate-50 mt-1">
                         <LayoutDashboard size={16} /> Dashboard
                       </Link>
