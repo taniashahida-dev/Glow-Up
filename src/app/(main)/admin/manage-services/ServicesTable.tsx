@@ -8,6 +8,7 @@ import { Input, Button, AlertDialog } from "@heroui/react";
 import { Service } from "@/app/types/service";
 import { deleteService } from "@/lib/api/service";
 import EditServiceModal from "@/components/dashboard/EditServiceModal";
+import toast from "react-hot-toast";
 
 interface ServicesTableProps {
   initialServices: Service[];
@@ -72,7 +73,7 @@ export default function ServicesTable({ initialServices }: ServicesTableProps) {
       }
     } catch (error) {
       console.error("Delete failed:", error);
-      alert("Failed to delete the service. Please try again.");
+      toast.error("Failed to delete the service. Please try again.");
     } finally {
       setDeletingId(null);
       setActiveDeleteService(null);

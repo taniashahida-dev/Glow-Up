@@ -1,6 +1,4 @@
 "use client";
-
-import React from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
 import { MonthlyExpensePoint, CategoryAnalysisPoint } from "@/app/types/dashboard";
 
@@ -22,12 +20,10 @@ export default function UserDashboardCharts({ monthlyExpense, categoryAnalysis }
       return monthStr;
     }
   };
-
   const formattedBarData = monthlyExpense.map((item) => ({
     ...item,
     displayMonth: formatMonth(item.month),
   }));
-
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       
@@ -55,7 +51,6 @@ export default function UserDashboardCharts({ monthlyExpense, categoryAnalysis }
           )}
         </div>
       </div>
-
       <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-xs">
         <div className="mb-4">
           <h3 className="text-base font-bold text-slate-900">Favorite Services</h3>
@@ -99,7 +94,6 @@ export default function UserDashboardCharts({ monthlyExpense, categoryAnalysis }
           )}
         </div>
       </div>
-
     </div>
   );
 }

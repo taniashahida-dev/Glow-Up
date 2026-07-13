@@ -20,6 +20,7 @@ import {
 import { createBooking } from "@/lib/api/bookings";
 import { ServiceDetailsResponse, Service } from "@/app/types/service";
 import { AuthUser } from "./page";
+import toast from "react-hot-toast";
 
 interface ClientProps {
   serviceData: ServiceDetailsResponse;
@@ -54,8 +55,15 @@ export default function ServiceDetailsClient({
 
   const handleOpenBookingModal = () => {
     if (!user) {
-      alert("Please login first to book an appointment!");
+      toast.error("Please login first to book an appointment!");
       router.push("/login");
+      return;
+    }
+
+
+    const userRole = user?.role 
+    if (userRole === "admin") {
+      toast.error("Only users can book appointments. If you want to book, please log in with a user account!");
       return;
     }
     setIsOpen(true);
@@ -65,12 +73,12 @@ export default function ServiceDetailsClient({
     e.preventDefault();
 
     if (!timeSlot) {
-      alert("Please select a time slot!");
+     toast.error("Please select a time slot!");
       return;
     }
 
     if (bookingDate < todayString) {
-      alert("You cannot select a past date!");
+      toast.error("You cannot select a past date!");
       return;
     }
 
@@ -88,13 +96,14 @@ export default function ServiceDetailsClient({
       try {
         const response = await createBooking(payload);
         if (response.success) {
-          alert(response.message || "Appointment booked successfully! 🎉");
+          toast.success(response.message || "Appointment booked successfully! 🎉");
           setCustomerName("");
           setPhoneNumber("");
           setBookingDate("");
           setTimeSlot("");
           setNotes("");
           setIsOpen(false);
+         router.push("/user/my-bookings");
         }
       } catch (error: unknown) {
         console.error("Booking failed:", error);
@@ -102,7 +111,7 @@ export default function ServiceDetailsClient({
           error instanceof Error
             ? error.message
             : "Something went wrong. Please try again.";
-        alert(errorMessage);
+        toast.error(errorMessage);
       }
     });
   };
