@@ -1,19 +1,18 @@
 @import "tailwindcss";
 @import "@heroui/styles";
 
-/* Tailwind CSS v4 Theme Customization */
 @theme {
-  /* Figma Exact Color Palette */
-  --color-salon-pink: #ec4899;       /* Bright Magenta/Hot Pink */
-  --color-salon-pink-hover: #db2777; /* Darker Pink for Hover */
-  --color-salon-dark: #0f172a;       /* Deep Slate/Navy Black */
-  --color-salon-muted: #64748b;      /* Muted Cool Gray */
+
+  --color-salon-pink: #ec4899;       
+  --color-salon-pink-hover: #db2777; 
+  --color-salon-dark: #0f172a;       
+  --color-salon-muted: #64748b;      
   
   /* Font Mapping */
   --font-sans: var(--font-sans), ui-sans-serif, system-ui;
 
   /* UI Rules */
-  --radius-salon: 0.75rem;           /* 12px Rounded corners */
+  --radius-salon: 0.75rem;          
 }
 
 /* Base Styles  */
