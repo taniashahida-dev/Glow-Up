@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Crown, Menu, X, ChevronDown, LayoutDashboard, CalendarDays, ClipboardList, PlusCircle, Users, LogOut, LeafyGreen } from "lucide-react";
-import { useSession } from "@/lib/auth-client";
+import { authClient, useSession } from "@/lib/auth-client";
 
 export default function Navbar() {
   const { data } = useSession();
@@ -42,15 +42,17 @@ export default function Navbar() {
   }, []);
 
   const isActive = (path: string) => pathname === path;
-  
-  // 🚀 শুধুমাত্র হোম (/) এবং অ্যাবাউট (/about) পেজে ট্রান্সপারেন্ট থাকবে, বাকি সব পেজে হোয়াইট ব্যাকগ্রাউন্ড হবে
+ 
   const isWhiteNavbar = isScrolled || isOpen || (pathname !== "/" && pathname !== "/about");
 
-  const handleLogout = () => {
+  const handleLogout =async () => {
     setIsDropdownOpen(false);
     setIsOpen(false);
     console.log("Logging out...");
+     await authClient.signOut();
+    window.location.href = "/";
   };
+    
 
   return (
     <nav
