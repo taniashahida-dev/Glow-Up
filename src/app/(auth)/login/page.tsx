@@ -60,6 +60,38 @@ export default function SignInPage() {
       setError("Google sign-in failed.");
     }
   };
+
+  const handleDirectDemoLogin = async (role: "user" | "admin") => {
+    setError("");
+    setIsLoading(true);
+
+    const demoEmail =
+      role === "user" ? "taniia.webdev1@gmail.com" : "admin@gmail.com";
+    const demoPassword =
+      role === "user" ? "taniia.webdev1@gmail.com" : "admin@gmail.com";
+
+    setEmail(demoEmail);
+    setPassword(demoPassword);
+
+    try {
+      const { error: authError } = await signIn.email({
+        email: demoEmail,
+        password: demoPassword,
+      });
+
+      if (authError) {
+        setError(authError.message || `Failed to login as demo ${role}.`);
+        return;
+      }
+
+      router.push("/");
+    } catch (err) {
+      setError("An unexpected network error occurred.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="flex min-h-screen w-full">
       {/* Left side Image */}
@@ -100,7 +132,6 @@ export default function SignInPage() {
               <Input
                 placeholder="you@example.com"
                 value={email}
-
                 onChange={(e) => setEmail(e.target.value)}
               />
               <FieldError />
@@ -111,7 +142,6 @@ export default function SignInPage() {
               <Input
                 placeholder="Enter your password"
                 value={password}
-
                 onChange={(e) => setPassword(e.target.value)}
               />
               <FieldError />
@@ -155,6 +185,35 @@ export default function SignInPage() {
             >
               <FcGoogle /> Google Sign In
             </Button>
+
+            {/* --- Demo Login Buttons for Examiner --- */}
+            <div className="mt-4 pt-4 border-t border-gray-100 space-y-2">
+              <p className="text-xs font-semibold text-center text-gray-400 uppercase tracking-wider">
+                ⚡ Instant Demo Login
+              </p>
+              <div className="flex justify-center items-center gap-3">
+                <Button
+                  type="button"
+                  variant="outline"
+                  isDisabled={isLoading}
+                  className="bg-emerald-50 text-emerald-700 font-bold text-xs rounded-xl"
+                  onClick={() => handleDirectDemoLogin("user")}
+                >
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  Login as User
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  isDisabled={isLoading}
+                  className="bg-gray-800 text-white font-bold text-xs rounded-xl hover:bg-gray-900"
+                  onClick={() => handleDirectDemoLogin("admin")}
+                >
+                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                  Login as Admin
+                </Button>
+              </div>
+            </div>
           </Form>
 
           <p className="mt-6 text-center">

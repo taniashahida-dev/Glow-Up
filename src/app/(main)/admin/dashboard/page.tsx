@@ -1,6 +1,8 @@
 import { getDashboardAnalytics } from "@/lib/api/dashboard";
 import DashboardOverviewClient from "@/components/dashboard/DashboardOverviewClient";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminDashboardOverview() {
   let data = null;
   let isError = false;

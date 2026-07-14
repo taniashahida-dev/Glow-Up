@@ -51,6 +51,7 @@ export default function SignUpPage() {
       setIsLoading(false);
     }
   };
+
   const handleGoogleSignIn = async () => {
     setError("");
     try {
@@ -60,6 +61,40 @@ export default function SignUpPage() {
       });
     } catch (err) {
       setError("Google sign-in failed.");
+    }
+  };
+
+  const handleDirectDemoLogin = async (role: "user" | "admin") => {
+    setError("");
+    setIsLoading(true);
+
+    const demoName = role === "user" ? "Tania" : "Tunni";
+    const demoEmail =
+      role === "user" ? "taniia.webdev1@gmail.com" : "admin@gmail.com";
+    const demoPassword =
+      role === "user" ? "taniia.webdev1@gmail.com" : "admin@gmail.com";
+
+    setName(demoName);
+    setEmail(demoEmail);
+    setPassword(demoPassword);
+    setConfirmPassword(demoPassword);
+
+    try {
+      const { error: authError } = await signIn.email({
+        email: demoEmail,
+        password: demoPassword,
+      });
+
+      if (authError) {
+        setError(authError.message || `Failed to login as demo ${role}.`);
+        return;
+      }
+
+      router.push("/");
+    } catch (err) {
+      setError("Something went wrong during auto-login.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -161,6 +196,35 @@ export default function SignUpPage() {
             >
               <FcGoogle /> Sign up with Google
             </Button>
+
+            {/* --- Instant Demo Login Buttons for Examiner --- */}
+            <div className="mt-4 pt-4 border-t border-gray-100 space-y-2">
+              <p className="text-xs font-semibold text-center text-gray-400 uppercase tracking-wider">
+                Instant Demo Login (Bypass Register)
+              </p>
+              <div className="flex items-center justify-center gap-3">
+                <Button
+                  type="button"
+                  variant="outline"
+                  isDisabled={isLoading}
+                  className="bg-emerald-50 text-emerald-700 font-bold text-xs rounded-xl"
+                  onClick={() => handleDirectDemoLogin("user")}
+                >
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  Login as User
+                </Button>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  isDisabled={isLoading}
+                  className="bg-gray-800 text-white font-bold text-xs rounded-xl hover:bg-gray-900"
+                  onClick={() => handleDirectDemoLogin("admin")}
+                >
+                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                  Login as Admin
+                </Button>
+              </div>
+            </div>
           </Form>
 
           <p className="mt-6 text-center">
