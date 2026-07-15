@@ -95,7 +95,7 @@ export default function AddServiceForm() {
       const response = await createService(serviceData);
 
       if (response.success) {
-        router.push("/admin/dashboard");
+        router.push("/admin/manage-services");
         router.refresh();
       } else {
         setErrorMsg("Failed to create the service. Please try again.");
