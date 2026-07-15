@@ -28,6 +28,9 @@ export const createService = async (
   serviceData: CreateServiceInput
 ): Promise<CreateServiceResponse> => {
   const token = await getAccessToken();
+  if (!token) {
+    throw new Error("Your session has expired. Please log in again.");
+  }
   return serverMutation<CreateServiceResponse>("/api/services", serviceData, "POST", token);
 };
 
