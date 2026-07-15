@@ -38,7 +38,8 @@ export default function AddServiceForm() {
     setLoading(true);
     setErrorMsg(null);
 
-    const formData = new FormData(e.currentTarget);
+    const formEl = e.currentTarget;
+    const formData = new FormData(formEl);
 
     if (!selectedFile) {
       setErrorMsg("Please select a service image.");
@@ -69,39 +70,53 @@ export default function AddServiceForm() {
 
       if (!imgBbResponse.ok) {
         throw new Error(
-          `Image upload failed (status ${imgBbResponse.status}). Please try again.`,
+          `Image upload failed (status ${imgBbResponse.status}).`,
         );
       }
 
       const imgBbData = await imgBbResponse.json();
-
       if (!imgBbData.success) {
         throw new Error("Failed to upload image to Image DB.");
       }
 
       const uploadedImageUrl: string = imgBbData.data.url;
 
+      const rawPrice = formData.get("price") as string;
+      const rawDuration = formData.get("duration") as string;
+      const rawRating = formData.get("rating") as string;
+
       const serviceData: CreateServiceInput = {
-        title: formData.get("title") as string,
+        title: (formData.get("title") as string)?.trim(),
         category: selectedCategory as CreateServiceInput["category"],
-        shortDescription: formData.get("shortDescription") as string,
-        description: formData.get("description") as string,
-        price: parseFloat(formData.get("price") as string),
-        duration: parseInt(formData.get("duration") as string),
-        rating: parseFloat(formData.get("rating") as string) || 5.0,
+        shortDescription: (formData.get("shortDescription") as string)?.trim(),
+        description: (formData.get("description") as string)?.trim(),
+        price: parseFloat(rawPrice),
+        duration: parseInt(rawDuration),
+        rating: parseFloat(rawRating) || 5.0,
         image: uploadedImageUrl,
       };
 
       const response = await createService(serviceData);
 
-      if (response.success) {
+      if (response && (response.success || response.result?.insertedId)) {
+        setSelectedFile(null);
+        formEl.reset();
+
         router.push("/admin/manage-services");
         router.refresh();
       } else {
-        setErrorMsg("Failed to create the service. Please try again.");
+        const backendError =
+          (response as unknown as { message?: string })?.message ||
+          "Failed to create the service on server.";
+        setErrorMsg(backendError);
       }
     } catch (err) {
-      setErrorMsg(err instanceof Error ? err.message : "Something went wrong.");
+      console.error("Error during service creation:", err);
+      setErrorMsg(
+        err instanceof Error
+          ? `Error: ${err.message}. Please check if you are logged in as Admin.`
+          : "Something went wrong.",
+      );
     } finally {
       setLoading(false);
     }
