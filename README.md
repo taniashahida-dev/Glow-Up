@@ -33,7 +33,7 @@ The frontend is built with **Next.js** and **TypeScript** for a fast, type-safe,
 
 | Environment | Link |
 |---|---|
-| 🖥️ Frontend Live Link | [YOUR_FRONTEND_URL](https://glow-up-your-beauty.vercel.app) |
+| 🖥️ Frontend Live Link | (https://glow-up-your-beauty.vercel.app) |
 
 ---
 
@@ -41,7 +41,7 @@ The frontend is built with **Next.js** and **TypeScript** for a fast, type-safe,
 
 | Repository | Link |
 |---|---|
-| 🎨 Frontend Repository | [YOUR_FRONTEND_REPOSITORY](https://github.com/taniashahida-dev/Glow-Up) |
+| 🎨 Frontend Repository |(https://github.com/taniashahida-dev/Glow-Up) |
 
 ---
 
@@ -107,7 +107,7 @@ The frontend is built with **Next.js** and **TypeScript** for a fast, type-safe,
 
 ### 1️⃣ Clone the repository
 ```bash
-git clone YOUR_FRONTEND_REPOSITORY
+git clone https://github.com/taniashahida-dev/Glow-Up
 cd glowup-frontend
 ```
 
